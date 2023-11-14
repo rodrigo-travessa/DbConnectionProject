@@ -1,0 +1,46 @@
+﻿@model DbConnectionProject.Models.ViewModels.CarroCreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Carro</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreatePost">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>            
+            <div class="form-group">
+                <label asp-for="@Model.Carro.Modelo" class="control-label"></label>
+                <input asp-for="@Model.Carro.Modelo" class="form-control" />
+                <span asp-validation-for="@Model.Carro.Modelo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Carro.Marca" class="control-label"></label>
+                <input asp-for="@Model.Carro.Marca" class="form-control" />
+                <span asp-validation-for="@Model.Carro.Marca" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Carro.DonoId" class="control-label"></label>
+                <select asp-for="Carro.DonoId" class="form-select" 
+                asp-items="@(new SelectList(Model.Pessoas, nameof(Pessoa.Id), nameof(Pessoa.Nome)))">               
+                    <option>Please select one</option>                    
+                </select>
+                <span asp-validation-for="@Model.Carro.DonoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

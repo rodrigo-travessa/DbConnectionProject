@@ -1,0 +1,36 @@
+﻿@model DbConnectionProject.Models.ViewModels.CarroCreateViewModel
+
+<h1>Edit</h1>
+
+<h4>Category</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditPost">
+            <input type="hidden" asp-for="Carro.Id" />
+            <div class="form-group">
+                <label asp-for="Carro.Marca" class="control-label"></label>
+                <input asp-for="Carro.Marca" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Carro.Modelo" class="control-label"></label>
+                <input asp-for="Carro.Modelo" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Carro.DonoId" class="control-label"></label>
+                <select asp-for="Carro.DonoId" class="form-select"
+                asp-items="@(new SelectList(Model.Pessoas, nameof(Pessoa.Id), nameof(Pessoa.Nome)))">
+                    <option value="Model.Carro.DonoId">@Model.Pessoas.Where(x => x.Id == Model.Carro.DonoId).FirstOrDefault().Nome</option>
+                </select>
+                <span asp-validation-for="@Model.Carro.DonoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
